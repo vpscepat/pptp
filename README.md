@@ -12,6 +12,6 @@ untuk lainya lagi kejar tanyang mas gan :D
 Installation
 ====
 
-  yum install -y git
-  cd /vpscepat && git clone git://github.com/vpscepat/pptp.git
-  cd pptp && bash pptp.sh
+    yum install -y git
+    cd /vpscepat && git clone git://github.com/vpscepat/pptp.git
+    cd pptp && bash pptp.sh
