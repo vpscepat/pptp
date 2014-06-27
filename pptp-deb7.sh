@@ -87,3 +87,7 @@ echo "Username:$u ##### Password: $p"
 
 elif test $x -eq 3; then
 tail /etc/ppp/chap-secrets
+
+else
+exit
+fi
