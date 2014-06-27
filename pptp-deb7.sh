@@ -7,8 +7,7 @@ echo "menu:"
 echo "1) Set up PPTP di server"
 echo "2) Buat User PPTP"
 echo "3) List User PPTP"
-
-
+read x
 if test $x -eq 1; then
 
 #ip vps
