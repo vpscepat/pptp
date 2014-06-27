@@ -10,8 +10,6 @@ echo "3) List User PPTP"
 read x
 if test $x -eq 1; then
 
-#ip vps
-ip=`ifconfig venet0:0 | grep 'inet addr' | awk {'print $2'} | sed s/.*://`
 
 #install program
 apt-get update
@@ -45,19 +43,12 @@ sed -i 's/^#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf
 sysctl -p
 
 ###Iptables
-
+ip=`ifconfig venet0:0 | grep 'inet addr' | awk {'print $2'} | sed s/.*://`
 iptables -t nat -A POSTROUTING -j SNAT --to-source $ip
 iptables -I INPUT -p tcp --dport 1723 -m state --state NEW -j ACCEPT
 iptables -I INPUT -p gre -j ACCEPT
 iptables -I FORWARD -p tcp --tcp-flags SYN,RST SYN -s 10.1.0.0/24 -j TCPMSS  --clamp-mss-to-pmtu
 iptables-save > /etc/iptables.conf
-cat > /etc/network/if-pre-up.d/iptables <<END
-iptables-restore < /etc/iptables.conf
-END
-chmod +x /etc/network/if-pre-up.d/iptables
-cat >> /etc/ppp/ip-up <<END
-ifconfig ppp0 mtu 1400
-END
 
 elif test $x -eq 2; then
     echo "username :"
