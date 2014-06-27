@@ -76,7 +76,7 @@ elif test $x -eq 2; then
     echo "password :"
     read p
 ip=`ifconfig venet0:0 | grep 'inet addr' | awk {'print $2'} | sed s/.*://`
-echo "$u    *   $p  *" >> /etc/ppp/chap-secrets
+echo "$u * $p *" >> /etc/ppp/chap-secrets
 service pptpd restart
 
 echo "user ditambahkan"
