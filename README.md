@@ -12,6 +12,8 @@ untuk lainya lagi kejar tanyang mas gan :D
 Installation
 ====
 
+cara 1 :
+
     apt-get install -y git
     cd /vpscepat && git clone git://github.com/vpscepat/pptp.git
     cd pptp && bash pptp.sh
