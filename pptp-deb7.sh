@@ -43,8 +43,8 @@ sed -i 's/^#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf
 sysctl -p
 
 ###Iptables
-ip=`ifconfig venet0:0 | grep 'inet addr' | awk {'print $2'} | sed s/.*://`
-iptables -t nat -A POSTROUTING -j SNAT --to-source $ip
+IP=$(wget -qO- ifconfig.me/ip)
+iptables -t nat -A POSTROUTING -j SNAT --to-source $IP
 iptables -I INPUT -p tcp --dport 1723 -m state --state NEW -j ACCEPT
 iptables -I INPUT -p gre -j ACCEPT
 iptables -I FORWARD -p tcp --tcp-flags SYN,RST SYN -s 10.1.0.0/24 -j TCPMSS  --clamp-mss-to-pmtu
@@ -55,12 +55,10 @@ elif test $x -eq 2; then
     read u
     echo "password :"
     read p
-ip=`ifconfig venet0:0 | grep 'inet addr' | awk {'print $2'} | sed s/.*://`
 echo "$u * $p *" >> /etc/ppp/chap-secrets
 service pptpd restart
 
 echo "user ditambahkan"
-echo "connect ke ip : $ip dengan :"
 echo "Username:$u ##### Password: $p"
 
 
