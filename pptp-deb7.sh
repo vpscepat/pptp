@@ -46,25 +46,14 @@ sysctl -p
 
 ###Iptables
 
-#read -p "jika sg.gs ato openvz pencet 1, sg.do ato xen/kvm pecet 2?" VMVIRTTYPE
-#echo $VMVIRTTYPE
-
-#if [ "$VMVIRTTYPE" = "1" ]
-#then
 iptables -t nat -A POSTROUTING -j SNAT --to-source $ip
 iptables -I INPUT -p tcp --dport 1723 -m state --state NEW -j ACCEPT
 iptables -I INPUT -p gre -j ACCEPT
 iptables -I FORWARD -p tcp --tcp-flags SYN,RST SYN -s 10.1.0.0/24 -j TCPMSS  --clamp-mss-to-pmtu
-#elif [ "$VMVIRTTYPE" = "2" ]
-#then
-#fi
-
 iptables-save > /etc/iptables.conf
- 
 cat > /etc/network/if-pre-up.d/iptables <<END
 iptables-restore < /etc/iptables.conf
 END
- 
 chmod +x /etc/network/if-pre-up.d/iptables
 cat >> /etc/ppp/ip-up <<END
 ifconfig ppp0 mtu 1400
