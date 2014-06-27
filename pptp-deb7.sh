@@ -3,12 +3,11 @@
 #putdispenserhere.com
 #https://github.com/drewsymo
 
-echo "######################################################"
 echo "menu:"
 echo "1) Set up PPTP di server"
 echo "2) Buat User PPTP"
 echo "3) List User PPTP"
-echo "######################################################"
+
 
 if test $x -eq 1; then
 
@@ -82,5 +81,9 @@ echo "$u    *   $p  *" >> /etc/ppp/chap-secrets
 service pptpd restart
 
 echo "user ditambahkan"
-echo "Connect to your VPS at $ip with these credentials:"
+echo "connect ke ip : $ip dengan :"
 echo "Username:$u ##### Password: $p"
+
+
+elif test $x -eq 3; then
+tail /etc/ppp/chap-secrets
