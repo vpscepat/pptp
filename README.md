@@ -32,12 +32,13 @@ cara alternatif :
     cd /root && git clone git://github.com/vpscepat/pptp.git
     cd pptp && bash pptp-deb7.sh
     
-cara pakek
-==
-masuk lewat putty
-kemudian kopi paste ajah scrip diatas
-pecet angka 1 buat install
-jika selesai jalankan lagi script "sh /root/pptp-deb7.sh"
-pecet angka 2 buat adduser
-jika selesai jalankan lagi script "sh /root/pptp-deb7.sh"
-pecet angka 3 list user
+penjelasan
+====
+> masuk ke putty dengan root
+> donload scrip wget --no-check-certificate -O /root/pptp-deb7.sh https://raw.github.com/vpscepat/pptp/master/pptp-deb7.sh
+> ketik ==> sh /root/pptp-deb7.sh
+> pecet angka 1
+> ketik ==> sh /root/pptp-deb7.sh
+> pecet angka 2 
+> ketik ==> sh /root/pptp-deb7.sh
+> pencet angka 3
