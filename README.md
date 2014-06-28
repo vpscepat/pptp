@@ -36,7 +36,7 @@ penjelasan
 ====
 > masuk ke putty dengan root
 
-> donload scrip wget --no-check-certificate -O /root/pptp-deb7.sh https://raw.github.com/vpscepat/pptp/master/pptp-deb7.sh
+> donload scrip ==> wget --no-check-certificate -O /root/pptp-deb7.sh https://raw.github.com/vpscepat/pptp/master/pptp-deb7.sh
 
 > ketik ==> sh /root/pptp-deb7.sh
 
