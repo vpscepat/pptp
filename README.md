@@ -13,14 +13,18 @@ Installation
 ====
 
 
-cara standar :
+cara standar 
+openvz :
 
     wget --no-check-certificate -O /root/pptp-deb7.sh https://raw.github.com/vpscepat/pptp/master/pptp-deb7.sh
     sh /root/pptp-deb7.sh
 
-untuk KVM
-    wget --no-check-certificate -O /root/pptp-deb7kvm.sh https://raw.github.com/vpscepat/pptp/master/pptp-deb7kmv.sh
+kvm :
+
+    wget --no-check-certificate -O /root/pptp-deb7kvm.sh https://raw.github.com/vpscepat/pptp/master/pptp-deb7kvm.sh
     sh /root/pptp-deb7.sh
+
+
 
 cara alternatif :
 
