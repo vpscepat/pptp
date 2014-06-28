@@ -50,6 +50,7 @@ iptables-save > /etc/iptables.up.rules
 cat >> /etc/ppp/ip-up <<END
 ifconfig ppp0 mtu 1400
 END
+
 elif test $x -eq 2; then
     echo "username :"
     read u
