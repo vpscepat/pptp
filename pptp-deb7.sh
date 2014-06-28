@@ -43,9 +43,13 @@ sed -i 's/^#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf
 sysctl -p
 
 ###Iptables
-IP=$(wget -qO- ifconfig.me/ip)
+IP=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0'`;
 iptables -t nat -A POSTROUTING -j SNAT --to-source $IP
-iptables-save > /etc/iptables.conf
+sed -i '$ i\iptables-restore < /etc/iptables.up.rules' /etc/rc.local
+iptables-restore < /etc/iptables.up.rules
+cat >> /etc/ppp/ip-up <<END
+ifconfig ppp0 mtu 1400
+END
 
 elif test $x -eq 2; then
     echo "username :"
