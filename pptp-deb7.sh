@@ -43,7 +43,7 @@ sed -i 's/^#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf
 sysctl -p
 
 ###Iptables
-IP=$(wget -qO- ifconfig.me/ip
+IP=$(wget -qO- ifconfig.me/ip)
 iptables -t nat -A POSTROUTING -j SNAT --to-source $IP
 sed -i '$ i\iptables-restore < /etc/iptables.up.rules' /etc/rc.local
 iptables-save > /etc/iptables.up.rules
