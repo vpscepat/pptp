@@ -43,8 +43,8 @@ sed -i 's/^#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf
 sysctl -p
 
 ###Iptables
-MYIP=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0'`;
-MYIP2="s/xxxxxxxxx/$MYIP/g";
+rm /etc/iptables.up.rules
+IP=`ifconfig venet0:0 | grep 'inet addr' | awk {'print $2'} | sed s/.*://`
 cat > /etc/iptables.up.rules <<END
 *filter
 :FORWARD ACCEPT [0:0]
@@ -58,13 +58,13 @@ COMMIT
 :PREROUTING ACCEPT [0:0]
 :OUTPUT ACCEPT [0:0]
 :POSTROUTING ACCEPT [0:0]
--A POSTROUTING -o venet0 -j SNAT --to-source xxxxxxxxx
--A POSTROUTING -j SNAT --to-source xxxxxxxxx
+-A POSTROUTING -o venet0 -j SNAT --to-source 123.123.123.123
+-A POSTROUTING -j SNAT --to-source 123.123.123.123
 COMMIT
 END
 
-sed -i $MYIP2 /etc/iptables.up.rules;
-iptables-save > /etc/iptables.up.rules
+sed -i s/123.123.123.123/$IP/g /etc/iptables.up.rules
+iptables-restore < /etc/iptables.up.rules
 cat >> /etc/ppp/ip-up <<END
 ifconfig ppp0 mtu 1400
 END
