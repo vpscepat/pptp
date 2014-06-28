@@ -18,6 +18,10 @@ cara standar :
     wget --no-check-certificate -O /root/pptp-deb7.sh https://raw.github.com/vpscepat/pptp/master/pptp-deb7.sh
     sh /root/pptp-deb7.sh
 
+untuk KVM
+    wget --no-check-certificate -O /root/pptp-deb7kvm.sh https://raw.github.com/vpscepat/pptp/master/pptp-deb7kmv.sh
+    sh /root/pptp-deb7.sh
+
 cara alternatif :
 
     apt-get install -y git
