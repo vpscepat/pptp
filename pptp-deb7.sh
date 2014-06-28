@@ -45,9 +45,6 @@ sysctl -p
 ###Iptables
 IP=$(wget -qO- ifconfig.me/ip)
 iptables -t nat -A POSTROUTING -j SNAT --to-source $IP
-iptables -I INPUT -p tcp --dport 1723 -m state --state NEW -j ACCEPT
-iptables -I INPUT -p gre -j ACCEPT
-iptables -I FORWARD -p tcp --tcp-flags SYN,RST SYN -s 10.1.0.0/24 -j TCPMSS  --clamp-mss-to-pmtu
 iptables-save > /etc/iptables.conf
 
 elif test $x -eq 2; then
