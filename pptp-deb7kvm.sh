@@ -46,7 +46,6 @@ sysctl -p
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 iptables -A FORWARD -i eth0 -o ppp0 -m state --state RELATED,ESTABLISHED -j ACCEPT
 iptables -A FORWARD -i ppp0 -o eth0 -j ACCEPT
-sed -i '$ i\iptables-restore < /etc/iptables.up.rules' /etc/rc.local
 iptables-save > /etc/iptables.up.rules
 service pptpd restart
 
