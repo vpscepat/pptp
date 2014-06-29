@@ -43,12 +43,27 @@ sed -i 's/^#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf
 sysctl -p
 
 ###Iptables
-iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-iptables -A FORWARD -i eth0 -o ppp0 -m state --state RELATED,ESTABLISHED -j ACCEPT
-iptables -A FORWARD -i ppp0 -o eth0 -j ACCEPT
-iptables-save > /etc/iptables.up.rules
-service pptpd restart
+rm /etc/iptables.up.rules
+IP=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0'`;
+cat > /etc/iptables.up.rules <<END
+*filter
+:FORWARD ACCEPT [0:0]
+:INPUT ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A FORWARD -s 192.168.100.0/255.255.255.0 -j ACCEPT
+COMMIT
 
+*nat
+:PREROUTING ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+:POSTROUTING ACCEPT [0:0]
+-A POSTROUTING -o venet0 -j SNAT --to-source 123.123.123.123
+COMMIT
+END
+
+sed -i s/123.123.123.123/$IP/g /etc/iptables.up.rules
+iptables-restore < /etc/iptables.up.rules
 
 elif test $x -eq 2; then
     echo "username :"
