@@ -68,6 +68,7 @@ iptables-restore < /etc/iptables.up.rules
 cat >> /etc/ppp/ip-up <<END
 ifconfig ppp0 mtu 1400
 END
+sed -i '$ i\iptables-restore < /etc/iptables.up.rules' /etc/rc.local
 
 elif test $x -eq 2; then
     echo "username :"
