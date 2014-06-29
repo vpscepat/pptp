@@ -61,9 +61,13 @@ COMMIT
 -A POSTROUTING -o venet0 -j SNAT --to-source 123.123.123.123
 COMMIT
 END
-
 sed -i s/123.123.123.123/$IP/g /etc/iptables.up.rules
 iptables-restore < /etc/iptables.up.rules
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+iptables -A FORWARD -i eth0 -o ppp0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -i ppp0 -o eth0 -j ACCEPT
+iptables-restore > /etc/iptables.up.rules
+service pptpd restart
 
 elif test $x -eq 2; then
     echo "username :"
