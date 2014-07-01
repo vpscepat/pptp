@@ -7,6 +7,9 @@ echo "menu:"
 echo "1) Set up PPTP di server"
 echo "2) Buat User PPTP"
 echo "3) List User PPTP"
+echo "4) Edit User PPTP dengan nano"
+echo "5) Edit User PPTP dengan vim"
+echo "6) Restart PPTP"
 read x
 if test $x -eq 1; then
 
@@ -84,6 +87,16 @@ echo "Username:$u ##### Password: $p"
 
 elif test $x -eq 3; then
 tail /etc/ppp/chap-secrets
+
+elif test $x -eq 4; then
+nano /etc/ppp/chap-secrets
+
+elif test $x -eq 5; then
+vim /etc/ppp/chap-secrets
+
+elif test $x -eq 6; then
+service pptpd restart
+
 
 else
 exit
